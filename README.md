@@ -2,6 +2,7 @@
 
 Run Instruction : 
 - Open sln file using visual studio 
+- npm install in CleanWebApp Folder
 - build solution 
 - set startup project to CA.WebApp and run solution 
 - it's using in memory database so does not need to run db migration 
