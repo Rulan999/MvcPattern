@@ -1,0 +1,37 @@
+﻿@using CA.WebApp.ViewModels
+@model CountryUpdateViewModel
+@{
+    ViewData["Title"] = "Update Country Page";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Country">Country</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update Coutry</li>
+    </ol>
+</nav>
+@Html.AntiForgeryToken()
+
+
+<div class="card bg-light mb-3">
+    <div class="card-header"><h1>Update Country</h1></div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.HiddenFor(m => m.Item.Id, new { id = "Id" })
+                <label class="control-label">Country Name</label>
+                @Html.TextBoxFor(m => m.Item.CountryName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Item.CountryName, "", new { @class = "text-danger" })
+            </div>
+            
+            <button id="btnSave" type="submit" class="btn btn-primary btn-sm mr-sm-2" onclick = "return confirm('Are you sure to update this data')">SAVE</button>
+            @Html.ActionLink("CANCEL", "Index", new { }, new { @id = "btnCancel", @class = "btn btn-danger btn-sm mr-sm-2" })
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    
+    }

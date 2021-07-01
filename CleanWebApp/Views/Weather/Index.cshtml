@@ -1,0 +1,86 @@
+﻿@using CA.WebApp.ViewModels
+@model WeatherViewModel
+@{ ViewData["Title"] = "Check Weather"; }
+
+
+<div class="card bg-light mb-3">
+    <div class="card-header"><h1>Check Weather</h1></div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="control-label">Country</label>
+                @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "CountryId" })
+                @Html.ValidationMessage("Cat")
+                @Html.ValidationMessageFor(m => m.CountryId)
+            </div>
+            <div class="form-group">
+                <label class="control-label">City</label>
+                @Html.DropDownListFor(m => m.CityId, new SelectList(Model.Cities, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "CityId" })
+                @Html.ValidationMessageFor(m => m.CityId)
+            </div>
+            <button id="btnFind" type="submit" class="btn btn-primary btn-sm mr-sm-2">Find</button>
+
+
+        </form>
+    </div>
+</div>
+
+@if (Model.Output!=null)
+{
+<div class="card bg-light mb-3">
+    <div class="card-header"><h1>Search Result</h1></div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label class="control-label">Location</label>
+                @Html.Label("Location", $"{Model.Output.Coord.Lon} / {Model.Output.Coord.Lat}", new { @class = "form-control", @id = "lblLocation", @style = "background-color:silver" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">Weather</label>
+                @Html.Label("Supplier", $"{Model.Output.Weather.Main} - {Model.Output.Weather.Description} - {Model.Output.Weather.Icon}", new { @class = "form-control", @id = "lblCommision", @style = "background-color:silver" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">Base</label>
+                @Html.Label("Supplier", $"{Model.Output.Base} ", new { @class = "form-control", @id = "lblCommision", @style = "background-color:silver" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">Visibility</label>
+                @Html.Label("Supplier", $"{Model.Output.Visibility} ", new { @class = "form-control", @id = "lblCommision", @style = "background-color:silver" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">Wind</label>
+                @Html.Label("Supplier", $"{Model.Output.Wind.Speed} - {Model.Output.Wind.Deg} ", new { @class = "form-control", @id = "lblCommision", @style = "background-color:silver" })
+            </div>
+
+        </form>
+    </div>
+</div>
+}
+
+                @section Scripts {
+
+                    <script at="Foot">
+
+                        $(document).ready(
+                            function () {
+
+                                $("#CountryId").change(function () {
+                                    var countryId = $("[id*='CountryId'] :selected").val()
+                                    $.ajax({
+                                        url: "/api/WeatherApi/GetCityListByCountry?countryId=" + countryId,
+                                        dataType: "json",
+                                        success: function (data) {
+                                            let dropdown = $('#CityId');
+                                            dropdown.empty();
+                                            $.each(data, function (key, entry) {
+                                                dropdown.append($('<option></option>').attr('value', entry.value).text(entry.label));
+                                            })
+                                            dropdown.focus();
+                                        }
+                                    });
+                                });
+
+
+                            });</script>
+
+                }

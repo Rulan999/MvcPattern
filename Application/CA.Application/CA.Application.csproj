@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\CA.Domain\CA.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UseCases\AddEmployee\AddEmployeeUseCase.cs" />
+    <Compile Remove="UseCases\AddEmployee\IAddEmployeeUseCase.cs" />
+    <Compile Remove="UseCases\EditEmployee\EditEmployeeUseCase.cs" />
+    <Compile Remove="UseCases\GetEmployeeTypes\GetEmployeeTypesUseCase.cs" />
+    <Compile Remove="UseCases\GetEmployeeTypes\IGetEmployeeTypesUseCase.cs" />
+    <Compile Remove="UseCases\GetEmployee\GetEmployeeUseCase.cs" />
+    <Compile Remove="UseCases\GetEmployee\IGetEmployeeUseCase.cs" />
+    <Compile Remove="UseCases\SearchEmployee\SearchEmployeesOutput.cs" />
+    <Compile Remove="UseCases\SearchEmployee\SearchEmployeesUseCase.cs" />
+    <Compile Remove="UseCases\SearchEmployee\SearchEmployeesInput.cs" />
+    <Compile Remove="UseCases\SearchEmployee\ISearchEmployeesUseCase.cs" />
+  </ItemGroup>
+</Project>

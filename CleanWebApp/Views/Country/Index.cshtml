@@ -1,0 +1,57 @@
+﻿@using CA.WebApp.ViewModels
+@model SearchCountryViewModel
+@{ ViewData["Title"] = "Manage Country Page"; }
+
+@section Head {
+}
+
+<h1>Manage Countries</h1>
+<nav class="admin-toolbar">
+
+    <form class="form-inline">
+        <div class="px-1">
+            <a href="country/create" class="btn btn-outline-primary">Add New</a>
+        </div>
+    </form>
+</nav>
+<div class="table-responsive-sm">
+    <table class="table table-striped" summary="Deals">
+        <thead>
+            <tr>
+                <th id="thId">ID</th>
+                <th id="thaCountryName">Country Name</th>
+                <th id="thActions">ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var entry in Model.items)
+            {
+            <tr>
+                <td>@entry.Id</td>
+                <td>@entry.CountryName</td>
+                <td style="text-align: right;">
+                    <div class="related float-right">
+                        <a href="country/update/@entry.Id" class="btn btn-outline-success btn-sm mb-2">Update</a>
+                    </div>
+                </td>
+            </tr>
+           }
+
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+
+    <script at="Foot">
+        $(document).ready(
+            function () {
+
+              
+
+            });</script>
+
+}
+
